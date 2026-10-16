@@ -1,5 +1,8 @@
 # Priyanshu Gupta · Portfolio
 
+[![CI](https://github.com/Priyanshu052600/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/Priyanshu052600/portfolio/actions/workflows/ci.yml)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Priyanshu052600/portfolio)
+
 A clean, recruiter-first developer portfolio built with Spring Boot MVC and Thymeleaf.
 It includes light/dark mode, impact stats, a career timeline, projects, skills,
 achievements, a resume download and a validated contact form.
