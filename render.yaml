@@ -10,6 +10,8 @@ services:
     healthCheckPath: /
     envVars:
       # Secret: Render asks for this value in the dashboard; it is never stored in Git.
+      # Gmail SMTP (MAIL_USERNAME/MAIL_PASSWORD) is deliberately absent: the free plan
+      # blocks SMTP ports. Add those only after upgrading to a paid instance.
       - key: RESEND_API_KEY
         sync: false
       - key: CONTACT_TO_EMAIL

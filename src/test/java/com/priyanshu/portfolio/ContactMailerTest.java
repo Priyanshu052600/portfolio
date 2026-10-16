@@ -23,7 +23,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 @TestPropertySource(properties = {
         "contact.mail.resend-api-key=test-key",
         "contact.mail.to=owner@example.com",
-        "contact.mail.from=Portfolio <onboarding@resend.dev>"
+        "contact.mail.resend-from=Portfolio <onboarding@resend.dev>"
 })
 class ContactMailerTest {
 

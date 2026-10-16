@@ -24,26 +24,43 @@ mvn test
 
 ## Contact form → your Gmail
 When a visitor clicks **Send message**, the message is validated, checked against a
-honeypot field for bots, logged, and emailed to `priyanshugupta78600@gmail.com` through
-[Resend](https://resend.com). Reply-To is set to the visitor, so you can just hit Reply.
-Resend sends over HTTPS, because Render's free plan blocks SMTP.
+honeypot field for bots, logged, and emailed to `priyanshugupta78600@gmail.com`.
+Reply-To is set to the visitor, so you can just hit Reply. If sending fails, the
+visitor sees an error asking them to email you directly.
 
-**One-time setup**
+The app picks the sender automatically, in this order:
+
+| # | Channel | Enabled by | Works on |
+|---|---|---|---|
+| 1 | **Gmail SMTP** as `pg012600@gmail.com` | `MAIL_USERNAME` + `MAIL_PASSWORD` | Your laptop, paid hosts. **Not Render free** (SMTP blocked) |
+| 2 | **Resend** HTTPS API | `RESEND_API_KEY` | Everywhere, including Render free |
+| 3 | Log only | nothing set | Everywhere |
+
+> ⚠️ Gmail wins when both are set. **Don't set `MAIL_USERNAME`/`MAIL_PASSWORD` on Render's
+> free plan**, or every send will time out. Use `RESEND_API_KEY` there instead.
+
+### Option 1: Gmail app password
+1. On **pg012600@gmail.com**, turn on 2-Step Verification (myaccount.google.com → Security).
+2. Create an app password at https://myaccount.google.com/apppasswords (name it "Portfolio").
+3. Run with it. Never commit it or share it:
+   ```bash
+   MAIL_USERNAME=pg012600@gmail.com MAIL_PASSWORD=your_app_password mvn spring-boot:run
+   ```
+   The startup log says `Contact emails: Gmail SMTP as pg012600@gmail.com -> priyanshugupta78600@gmail.com`.
+
+### Option 2: Resend (for Render free)
 1. Sign up at https://resend.com **using priyanshugupta78600@gmail.com**. Without a custom
    domain, Resend only delivers to the email you signed up with.
-2. Go to **API Keys → Create API key** (permission: *Sending access*) and copy it.
-3. Provide it as the `RESEND_API_KEY` environment variable. Never commit it.
-   - Locally: `RESEND_API_KEY=re_xxx mvn spring-boot:run`
-   - Render: service → **Environment** → `RESEND_API_KEY`
-
-If `RESEND_API_KEY` isn't set, messages are only logged (on Render, under **Logs**).
-If sending fails, the visitor sees an error asking them to email you directly.
+2. **API Keys → Create API key** (*Sending access*).
+3. Set `RESEND_API_KEY` (Render: service → **Environment**).
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `RESEND_API_KEY` | *(none)* | Turns email delivery on |
+| `MAIL_USERNAME` | *(none)* | Gmail account that sends (e.g. `pg012600@gmail.com`) |
+| `MAIL_PASSWORD` | *(none)* | That account's 16-character **app password** |
+| `RESEND_API_KEY` | *(none)* | Resend API key |
 | `CONTACT_TO_EMAIL` | `priyanshugupta78600@gmail.com` | Inbox that receives messages |
-| `CONTACT_FROM_EMAIL` | `Portfolio Contact <onboarding@resend.dev>` | Sender (use your own domain once verified in Resend) |
+| `CONTACT_FROM_EMAIL` | `Portfolio Contact <onboarding@resend.dev>` | Resend sender (use your own domain once verified) |
 
 ## Docker
 ```bash
