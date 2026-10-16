@@ -42,10 +42,13 @@ public class PortfolioController {
             return "home";
         }
         // Silently drop bot submissions that filled the hidden honeypot field.
-        if (form.getWebsite() == null || form.getWebsite().isBlank()) {
-            contactService.submit(form);
+        boolean isBot = form.getWebsite() != null && !form.getWebsite().isBlank();
+        boolean delivered = isBot || contactService.submit(form);
+        if (delivered) {
+            redirect.addFlashAttribute("contactSent", form.getName());
+        } else {
+            redirect.addFlashAttribute("contactFailed", true);
         }
-        redirect.addFlashAttribute("contactSent", form.getName());
         // Post/Redirect/Get so a page refresh doesn't resubmit the form.
         return "redirect:/#contact";
     }

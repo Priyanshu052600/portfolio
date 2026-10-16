@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Receives contact-form messages. Messages are logged (visible in the hosting
- * platform's logs) and kept in memory. Swap this for email or a database later.
+ * Receives contact-form messages: logs them (visible in the hosting platform's
+ * logs), keeps the most recent ones in memory, and emails them to the owner.
  */
 @Service
 public class ContactService {
@@ -21,8 +21,14 @@ public class ContactService {
     public record Message(String name, String email, String message, Instant receivedAt) {}
 
     private final List<Message> messages = Collections.synchronizedList(new ArrayList<>());
+    private final ContactMailer mailer;
 
-    public void submit(ContactForm form) {
+    public ContactService(ContactMailer mailer) {
+        this.mailer = mailer;
+    }
+
+    /** @return true if the message was delivered to the owner's inbox (or email is disabled) */
+    public boolean submit(ContactForm form) {
         Message msg = new Message(form.getName(), form.getEmail(), form.getMessage(), Instant.now());
         synchronized (messages) {
             if (messages.size() >= MAX_KEPT) {
@@ -31,6 +37,7 @@ public class ContactService {
             messages.add(msg);
         }
         log.info("New contact message from {} <{}>: {}", msg.name(), msg.email(), msg.message());
+        return mailer.send(msg);
     }
 
     public List<Message> recent() {

@@ -40,6 +40,15 @@ class PortfolioControllerTest {
     }
 
     @Test
+    void projectsShowOnlyTrueLinqWithItsSite() throws Exception {
+        mvc.perform(get("/"))
+                .andExpect(content().string(containsString("href=\"https://truelinq.com\"")))
+                .andExpect(content().string(containsString("Visit truelinq.com")))
+                .andExpect(content().string(not(containsString("Hotel Review Management System"))))
+                .andExpect(content().string(not(containsString("Hello, Magnificent"))));
+    }
+
+    @Test
     void homeDoesNotExposePhoneNumber() throws Exception {
         mvc.perform(get("/"))
                 .andExpect(content().string(not(containsString("7985731782"))));

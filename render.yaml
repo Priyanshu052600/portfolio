@@ -8,3 +8,9 @@ services:
     branch: main
     autoDeploy: true
     healthCheckPath: /
+    envVars:
+      # Secret: Render asks for this value in the dashboard; it is never stored in Git.
+      - key: RESEND_API_KEY
+        sync: false
+      - key: CONTACT_TO_EMAIL
+        value: priyanshugupta78600@gmail.com

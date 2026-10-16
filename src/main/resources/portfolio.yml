@@ -87,23 +87,11 @@ portfolio:
       stack: [Python, Django, SQL, Hadoop]
 
   projects:
-    - name: Listings AI Optimizer
-      year: "Birdeye"
-      description: AI-powered SEO and discoverability recommendations for enterprise brand listings across AI search and discovery platforms. Led end to end at Birdeye.
-      tags: [Java, Spring Boot, LangChain, MongoDB, Kafka]
     - name: TrueLinq
       year: "2024"
       description: Contact and digital card platform. Scalable backend APIs for personal and business digital cards, shared contact lists and digital invitations, built for throughput under concurrent load.
       tags: [Java, Spring Boot, AWS]
-    - name: Hotel Review Management System
-      year: "2020"
-      description: Microservices platform for posting, managing and analyzing hotel reviews, with inter-service communication via Spring Cloud.
-      tags: [Java, Spring Boot, Spring Cloud, Microservices]
-    - name: Hello, Magnificent
-      year: "2026"
-      description: Spring Boot MVC app with an animated greeting UI, shipped with GitHub Actions CI, Docker and a Render Blueprint.
-      tags: [Spring MVC, Thymeleaf, Docker, CI/CD]
-      link: https://github.com/Priyanshu052600/hello-magnificent
+      link: https://truelinq.com
 
   skills:
     - group: Languages

@@ -133,9 +133,13 @@
                     <span th:unless="${proj.link}" th:text="${proj.name}">Project</span>
                 </h3>
                 <p th:text="${proj.description}">Description</p>
-                <ul class="tags">
-                    <li th:each="t : ${proj.tags}" th:text="${t}">Java</li>
-                </ul>
+                <div class="project-foot">
+                    <ul class="tags">
+                        <li th:each="t : ${proj.tags}" th:text="${t}">Java</li>
+                    </ul>
+                    <a th:if="${proj.link}" class="visit" th:href="${proj.link}" target="_blank" rel="noopener"
+                       th:text="'Visit ' + ${#strings.replace(#strings.replace(proj.link, 'https://', ''), 'http://', '')} + ' ↗'">Visit site ↗</a>
+                </div>
             </article>
         </div>
     </section>
@@ -184,6 +188,10 @@
             <form class="card contact-form reveal" th:action="@{/contact}" th:object="${contactForm}" method="post" novalidate>
                 <div class="alert success" th:if="${contactSent}" role="status">
                     Thanks, <strong th:text="${contactSent}">friend</strong>! Your message is on its way. I'll get back to you soon.
+                </div>
+                <div class="alert failure" th:if="${contactFailed}" role="alert">
+                    Sorry, your message couldn't be delivered right now. Please email me directly at
+                    <a th:href="'mailto:' + ${p.contact.email}" th:text="${p.contact.email}">email</a>.
                 </div>
                 <label>Name
                     <input type="text" th:field="*{name}" autocomplete="name" maxlength="80" th:classappend="${#fields.hasErrors('name')} ? 'invalid'">

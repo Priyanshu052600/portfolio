@@ -22,11 +22,28 @@ Then open http://localhost:8080
 mvn test
 ```
 
-## Contact form messages
-Messages are validated, protected by a honeypot field against bots, written to the
-application log (`New contact message from …`) and kept in memory. On Render, read
-them under **Logs**. To get them by email, wire `ContactService` to an email API
-such as Resend or SendGrid. Render's free plan blocks SMTP ports.
+## Contact form → your Gmail
+When a visitor clicks **Send message**, the message is validated, checked against a
+honeypot field for bots, logged, and emailed to `priyanshugupta78600@gmail.com` through
+[Resend](https://resend.com). Reply-To is set to the visitor, so you can just hit Reply.
+Resend sends over HTTPS, because Render's free plan blocks SMTP.
+
+**One-time setup**
+1. Sign up at https://resend.com **using priyanshugupta78600@gmail.com**. Without a custom
+   domain, Resend only delivers to the email you signed up with.
+2. Go to **API Keys → Create API key** (permission: *Sending access*) and copy it.
+3. Provide it as the `RESEND_API_KEY` environment variable. Never commit it.
+   - Locally: `RESEND_API_KEY=re_xxx mvn spring-boot:run`
+   - Render: service → **Environment** → `RESEND_API_KEY`
+
+If `RESEND_API_KEY` isn't set, messages are only logged (on Render, under **Logs**).
+If sending fails, the visitor sees an error asking them to email you directly.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `RESEND_API_KEY` | *(none)* | Turns email delivery on |
+| `CONTACT_TO_EMAIL` | `priyanshugupta78600@gmail.com` | Inbox that receives messages |
+| `CONTACT_FROM_EMAIL` | `Portfolio Contact <onboarding@resend.dev>` | Sender (use your own domain once verified in Resend) |
 
 ## Docker
 ```bash
