@@ -1,0 +1,140 @@
+# ------------------------------------------------------------------
+# Portfolio content. Edit this file to update the website; no Java
+# changes needed. Restart the app (or redeploy) to see changes.
+# ------------------------------------------------------------------
+portfolio:
+  name: Priyanshu Gupta
+  initials: PG
+  role: Software Development Engineer
+  headline: I build backend systems that scale.
+  tagline: >-
+    Backend-focused engineer designing distributed systems, microservices and data
+    pipelines that serve millions of records in production.
+  location: India
+  open-to: Open to Senior Software Engineer roles
+  career-start: 2021-04-01
+  resume-file: /resume/Priyanshu_Gupta_Resume.pdf
+
+  about:
+    - >-
+      I'm a backend-focused Software Engineer who enjoys turning messy, high-traffic
+      problems into reliable, fast and maintainable systems. Today I'm at Birdeye,
+      building AI-powered listing products and the microservices behind them.
+    - >-
+      My work spans API performance tuning, zero-downtime migrations, observability
+      and AI-driven analytics, delivered end to end with cross-functional teams.
+      I'm looking for a Senior Software Engineer role focused on large-scale systems,
+      infrastructure and impactful product development.
+
+  contact:
+    email: priyanshugupta78600@gmail.com
+    linkedin: https://www.linkedin.com/in/priyanshu-gupta-b68887191
+    github: https://github.com/priyanshu052600
+
+  stats:
+    - value: "40%"
+      label: Faster P95 latency on high-traffic APIs
+    - value: "300K+"
+      label: Accounts migrated with zero downtime
+    - value: "1M+"
+      label: Users on a rewards platform I built
+    - value: "700+"
+      label: DSA problems solved
+
+  experience:
+    - company: Birdeye
+      role: Software Development Engineer
+      period: Jun 2024 – Present
+      location: India
+      current: true
+      highlights:
+        - Led the "Listings AI Optimizer" platform, delivering AI-powered SEO and discoverability recommendations for enterprise brand listings across AI search platforms.
+        - Cut P95 latency of three high-traffic Listing APIs by 40% through profiling, MongoDB aggregation tuning and distributed caching.
+        - Led in-house direct integrations that removed a third-party vendor, migrating 300K+ accounts with zero downtime and 100% accuracy.
+        - Architected a zero-downtime MongoDB v3 → v7 migration across microservices, with phased rollout and rollback automation.
+        - Built AI-driven analytics modules (sentiment analysis, listing accuracy validation, AI-O reporting) for enterprise brands.
+        - Designed an observability and alerting framework with end-to-end request traces and Slack/email alerts on 5xx, reducing MTTD.
+      stack: [Java, Spring Boot, MongoDB, Kafka, NiFi, Elasticsearch, Redis, Kubernetes, Docker, Jenkins, LangChain]
+
+    - company: Radram Quality Services (Al Mulla Exchange)
+      role: Software Development Engineer
+      period: May 2023 – Jun 2024
+      location: India
+      highlights:
+        - Delivered a centralized Reward Management Platform (loyalty points, lounge access, scratch cards, coupons) for 1M+ users across group entities.
+        - Revamped the remittance Dynamic Pricing Engine with route-level optimization, reducing pricing inconsistencies by ~35%.
+        - Directed the Java 8 → Java 21 migration using records, sealed classes and virtual threads.
+        - Engineered MPIN and biometric authentication services, lowering average login response time by ~45%.
+      stack: [Java, Spring Boot, MongoDB, OracleSQL, AWS EC2, Redis, Jenkins, Microservices]
+
+    - company: Tata Consultancy Services
+      role: Software Development Engineer
+      period: Sep 2021 – May 2023
+      location: New Delhi, India
+      highlights:
+        - Built and supported mission-critical applications for DGCA and multiple Indian Government organizations.
+        - Developed an MIS module with dynamic filter-based analytics and automated Excel reports, cutting manual reporting by ~80%.
+        - Partnered with QA and DevOps to accelerate release cycles and stabilize production rollouts.
+      stack: [Java, Spring, ZK Framework, MySQL, Jenkins, SVN]
+
+    - company: MuSigma
+      role: Software Development Intern
+      period: Apr 2021 – Sep 2021
+      location: Bengaluru, India
+      highlights:
+        - Engineered real-time data synchronization pipelines with Python and Hadoop for downstream analytics.
+        - Built interactive Django KPI dashboards, reducing stakeholder decision turnaround by ~60%.
+      stack: [Python, Django, SQL, Hadoop]
+
+  projects:
+    - name: Listings AI Optimizer
+      year: "Birdeye"
+      description: AI-powered SEO and discoverability recommendations for enterprise brand listings across AI search and discovery platforms. Led end to end at Birdeye.
+      tags: [Java, Spring Boot, LangChain, MongoDB, Kafka]
+    - name: TrueLinq
+      year: "2024"
+      description: Contact and digital card platform. Scalable backend APIs for personal and business digital cards, shared contact lists and digital invitations, built for throughput under concurrent load.
+      tags: [Java, Spring Boot, AWS]
+    - name: Hotel Review Management System
+      year: "2020"
+      description: Microservices platform for posting, managing and analyzing hotel reviews, with inter-service communication via Spring Cloud.
+      tags: [Java, Spring Boot, Spring Cloud, Microservices]
+    - name: Hello, Magnificent
+      year: "2026"
+      description: Spring Boot MVC app with an animated greeting UI, shipped with GitHub Actions CI, Docker and a Render Blueprint.
+      tags: [Spring MVC, Thymeleaf, Docker, CI/CD]
+      link: https://github.com/Priyanshu052600/hello-magnificent
+
+  skills:
+    - group: Languages
+      items: [Java, Python, SQL, NoSQL, Bash/Linux]
+    - group: Frameworks
+      items: [Spring Boot, Spring MVC, Django, LangChain]
+    - group: Databases
+      items: [MongoDB, MySQL, OracleSQL, Elasticsearch, Redis]
+    - group: Infrastructure
+      items: [Kubernetes, Docker, AWS (EC2, S3), Jenkins, Kafka, Apache NiFi]
+    - group: Practices
+      items: [Microservices, Distributed Systems, REST API Design, CI/CD, JUnit]
+    - group: AI Tools
+      items: [Claude Code, Cursor, GitHub Copilot]
+
+  achievements:
+    - icon: "🏆"
+      title: 1st Place, AI Hackathon
+      detail: Won Birdeye's AI Hackathon among multiple engineering teams with an AI-driven prototype.
+    - icon: "⭐"
+      title: Employee of the Month
+      detail: Birdeye, for leading high-impact platform work including ~40% API performance gains.
+    - icon: "⚡"
+      title: Fastest Learner Award
+      detail: Al Mulla Exchange, for ramping up on new tech and shipping to production within months.
+    - icon: "🎓"
+      title: Mentored 50+ engineers
+      detail: Taught DSA, coding interviews and system design through Chegg.
+
+  education:
+    school: Institute of Engineering & Technology (IET), Lucknow
+    degree: B.Tech
+    period: 2017 – 2021
+    score: "CGPA 8.90 / 10"

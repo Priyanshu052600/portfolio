@@ -1,0 +1,10 @@
+# Render Blueprint: deploys the Dockerfile as a free web service and
+# redeploys automatically on every push to main.
+services:
+  - type: web
+    name: priyanshu-portfolio
+    runtime: docker
+    plan: free
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /

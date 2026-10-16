@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${p.name} + ' · ' + ${p.role}">Portfolio</title>
+    <meta name="description" th:content="${p.tagline}">
+    <meta property="og:title" th:content="${p.name} + ' · ' + ${p.role}">
+    <meta property="og:description" th:content="${p.tagline}">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%234f46e5'/><text x='50%' y='54%' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='700' font-size='28' fill='white'>PG</text></svg>">
+    <!-- Apply the saved/system theme before paint to avoid a flash. -->
+    <script>
+        try {
+            const t = localStorage.getItem("theme");
+            if (t) document.documentElement.dataset.theme = t;
+        } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="nav" id="top">
+    <div class="container nav-inner">
+        <a href="#top" class="logo" th:text="${p.initials}" aria-label="Back to top">PG</a>
+        <nav class="nav-links" aria-label="Sections">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+            <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g></svg>
+        </button>
+    </div>
+</header>
+
+<main>
+    <!-- ================= HERO ================= -->
+    <section class="hero container">
+        <p class="status reveal"><span class="dot"></span><span th:text="${p.openTo}">Open to roles</span></p>
+        <h1 class="reveal">Hi, I'm <span class="accent" th:text="${#strings.substringBefore(p.name, ' ')}">Priyanshu</span>.<br>
+            <span th:text="${p.headline}">I build backend systems that scale.</span></h1>
+        <p class="lead reveal" th:text="${p.tagline}">Tagline</p>
+        <p class="meta reveal">
+            <span th:text="${p.role}">Role</span> · <span th:text="${p.experience[0].company}">Company</span> · <span th:text="${p.location}">India</span>
+        </p>
+        <div class="cta reveal">
+            <a class="btn btn-primary" th:href="@{${p.resumeFile}}" download>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+                Download Resume
+            </a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
+        <div class="socials reveal">
+            <a th:href="${p.contact.github}" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
+            </a>
+            <a th:href="${p.contact.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></svg>
+            </a>
+            <a th:href="'mailto:' + ${p.contact.email}" aria-label="Email">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ================= STATS ================= -->
+    <section class="container stats" aria-label="Impact at a glance">
+        <div class="stat reveal" th:each="s : ${p.stats}">
+            <div class="stat-value" th:text="${s.value}" th:attr="data-count=${s.value}">40%</div>
+            <div class="stat-label" th:text="${s.label}">label</div>
+        </div>
+        <div class="stat reveal">
+            <div class="stat-value" th:text="${p.yearsOfExperience()} + '+'" th:attr="data-count=${p.yearsOfExperience()} + '+'">5+</div>
+            <div class="stat-label">Years building production systems</div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section container" id="about">
+        <h2 class="section-title reveal"><span class="num">01</span> About</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p class="reveal" th:each="para : ${p.about}" th:text="${para}">About me</p>
+            </div>
+            <aside class="edu card reveal">
+                <p class="eyebrow">Education</p>
+                <h3 th:text="${p.education.degree}">B.Tech</h3>
+                <p th:text="${p.education.school}">School</p>
+                <p class="muted"><span th:text="${p.education.period}">2017–2021</span> · <span th:text="${p.education.score}">CGPA</span></p>
+            </aside>
+        </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section class="section container" id="experience">
+        <h2 class="section-title reveal"><span class="num">02</span> Experience</h2>
+        <ol class="timeline">
+            <li class="job reveal" th:each="job : ${p.experience}" th:classappend="${job.current} ? 'current'">
+                <div class="job-head">
+                    <div>
+                        <h3><span th:text="${job.role}">Role</span> <span class="at">@</span> <span class="company" th:text="${job.company}">Company</span></h3>
+                        <p class="muted" th:text="${job.location}">Location</p>
+                    </div>
+                    <span class="period" th:text="${job.period}">Period</span>
+                </div>
+                <ul class="highlights">
+                    <li th:each="h : ${job.highlights}" th:text="${h}">Highlight</li>
+                </ul>
+                <ul class="chips" aria-label="Tech stack">
+                    <li th:each="t : ${job.stack}" th:text="${t}">Java</li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="section container" id="projects">
+        <h2 class="section-title reveal"><span class="num">03</span> Projects</h2>
+        <div class="grid projects">
+            <article class="card project reveal" th:each="proj : ${p.projects}">
+                <div class="project-top">
+                    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" class="folder"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M3 6.5A1.5 1.5 0 0 1 4.5 5H9l2 2h8.5A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"/></svg>
+                    <span class="year" th:text="${proj.year}">2024</span>
+                </div>
+                <h3>
+                    <a th:if="${proj.link}" th:href="${proj.link}" target="_blank" rel="noopener" th:text="${proj.name}">Project</a>
+                    <span th:unless="${proj.link}" th:text="${proj.name}">Project</span>
+                </h3>
+                <p th:text="${proj.description}">Description</p>
+                <ul class="tags">
+                    <li th:each="t : ${proj.tags}" th:text="${t}">Java</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section class="section container" id="skills">
+        <h2 class="section-title reveal"><span class="num">04</span> Skills</h2>
+        <div class="grid skills">
+            <div class="card skill reveal" th:each="g : ${p.skills}">
+                <p class="eyebrow" th:text="${g.group}">Languages</p>
+                <ul class="chips">
+                    <li th:each="i : ${g.items}" th:text="${i}">Java</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ACHIEVEMENTS ================= -->
+    <section class="section container" id="achievements">
+        <h2 class="section-title reveal"><span class="num">05</span> Achievements</h2>
+        <div class="grid achievements">
+            <div class="card achievement reveal" th:each="a : ${p.achievements}">
+                <span class="badge" th:text="${a.icon}" aria-hidden="true">🏆</span>
+                <div>
+                    <h3 th:text="${a.title}">Title</h3>
+                    <p th:text="${a.detail}">Detail</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="section container" id="contact">
+        <h2 class="section-title reveal"><span class="num">06</span> Contact</h2>
+        <div class="contact-grid">
+            <div class="reveal">
+                <h3 class="contact-heading">Let's build something reliable together.</h3>
+                <p class="muted">I'm currently exploring Senior Software Engineer opportunities. Whether it's a role, a project or a system-design chat, my inbox is open.</p>
+                <ul class="contact-list">
+                    <li><span>Email</span><a th:href="'mailto:' + ${p.contact.email}" th:text="${p.contact.email}">email</a></li>
+                    <li><span>LinkedIn</span><a th:href="${p.contact.linkedin}" target="_blank" rel="noopener">priyanshu-gupta</a></li>
+                    <li><span>GitHub</span><a th:href="${p.contact.github}" target="_blank" rel="noopener">priyanshu052600</a></li>
+                </ul>
+            </div>
+
+            <form class="card contact-form reveal" th:action="@{/contact}" th:object="${contactForm}" method="post" novalidate>
+                <div class="alert success" th:if="${contactSent}" role="status">
+                    Thanks, <strong th:text="${contactSent}">friend</strong>! Your message is on its way. I'll get back to you soon.
+                </div>
+                <label>Name
+                    <input type="text" th:field="*{name}" autocomplete="name" maxlength="80" th:classappend="${#fields.hasErrors('name')} ? 'invalid'">
+                    <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </label>
+                <label>Email
+                    <input type="email" th:field="*{email}" autocomplete="email" maxlength="120" th:classappend="${#fields.hasErrors('email')} ? 'invalid'">
+                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </label>
+                <label>Message
+                    <textarea th:field="*{message}" rows="5" maxlength="2000" th:classappend="${#fields.hasErrors('message')} ? 'invalid'"></textarea>
+                    <span class="error" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
+                </label>
+                <!-- Honeypot: hidden from people, tempting for bots. -->
+                <label class="hp" aria-hidden="true">Website <input type="text" th:field="*{website}" tabindex="-1" autocomplete="off"></label>
+                <button type="submit" class="btn btn-primary">Send message</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <p>© <span id="year">2026</span> <span th:text="${p.name}">Name</span>. Built with Spring Boot &amp; Thymeleaf.</p>
+        <a href="#top">Back to top ↑</a>
+    </div>
+</footer>
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
